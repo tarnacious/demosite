@@ -2,30 +2,16 @@ from demosite import app
 import logging.config
 import os
 
+# Load build configuration to
+build_config = os.path.join(app.root_path, '../etc/build.cfg')
+app.config.from_pyfile(build_config)
 
-def get_app(config=None, logging_config=None):
-    """
-    Return a configured WSGI application.
+# Load application configuration
+app.config.from_pyfile(app.config["CONFIG"])
 
-    Keyword arguments:
-    config -- absolute path a config file
-    logging_config -- absolute path to a python logging config
-    """
-
-    if config is None:
-        config = os.path.join(app.root_path, '../etc/config.cfg')
-
-    app.config.from_pyfile(config)
-
-    if logging_config is not None:
-        app.logger
-        logging.config.fileConfig(logging_config)
-
-    return app
-
+# Load logging configuration
+if "LOGGING" in app.config:
+    logging.config.fileConfig(app.config["LOGGING"])
 
 def development_server():
-    """
-    Run the development server
-    """
-    get_app().run(debug=True)
+    app.run(debug=True)
