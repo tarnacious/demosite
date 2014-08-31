@@ -3,7 +3,7 @@ import logging.config
 import os
 
 # Load build configuration to
-build_config = os.path.join(app.root_path, '../etc/build.cfg')
+build_config = os.path.join(app.root_path, '/etc/build.cfg')
 app.config.from_pyfile(build_config)
 
 # Load application configuration
