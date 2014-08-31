@@ -1,0 +1,2 @@
+recursive-include demosite/templates *
+recursive-include demosite/static *
